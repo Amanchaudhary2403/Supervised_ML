@@ -1,6 +1,6 @@
 # Linear Regression from Scratch (NumPy Only)
 
-A clean, minimal implementation of **Ordinary Least Squares (OLS) Linear Regression** with optional **L2 (Ridge) Regularisation**, built entirely using NumPy — no scikit-learn or other ML libraries involved.
+A clean, minimal implementation of **Ordinary Least Squares (OLS) Linear Regression** with optional **L2 (Ridge) Regularisation**, built entirely using NumPy.
 
 ---
 

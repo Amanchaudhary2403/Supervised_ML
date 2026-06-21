@@ -208,45 +208,13 @@ print("Ridge coeffs:", ridge.coeff)  # Coefficients are shrunk toward zero
 
 The `Linear_Regression` class can perform **polynomial regression** by manually engineering polynomial features before fitting. The model itself stays linear in the *transformed* feature space.
 
-**Core idea:** Transform `x` into `[x, x², x³, ..., xᵈ]`, then fit a standard linear regression on those features.
+Even though this class is a linear model, it can fit non-linear data through feature engineering. The idea is to manually transform the raw input x into a matrix of polynomial terms — [x, x², x³, ..., xᵈ] — and pass that as the feature matrix X to .fit(). The model then treats each power as an independent feature and learns a coefficient for each, effectively fitting a polynomial curve while the underlying math stays identical.
+
+
+**Higher degree example:**
 
 ```python
-def make_polynomial_features(X, degree):
-    """
-    Expand a 1D input X into polynomial features up to the given degree.
-    Input : X of shape (n_samples,) or (n_samples, 1)
-    Output: feature matrix of shape (n_samples, degree)
-    """
-    X = np.array(X).flatten()
-    return np.column_stack([X**d for d in range(1, degree + 1)])
-
-
-# Generate non-linear data: y = 0.5x² - 2x + 3 + noise
-np.random.seed(0)
-x = np.linspace(-3, 3, 60)
-y = 0.5 * x**2 - 2 * x + 3 + np.random.randn(60) * 0.4
-
-# Expand to degree-2 polynomial features: [x, x²]
-X_poly = make_polynomial_features(x, degree=2)
-
-model = Linear_Regression()
-model.fit(X_poly, y)
-
-print("Coefficients:", model.coeff)    # approx [-2.0, 0.5]
-print("Intercept   :", model.intercept) # approx 3.0
-
-# Predict and evaluate
-y_pred = model.predict(X_poly)
-ss_res = np.sum((y - y_pred) ** 2)
-ss_tot = np.sum((y - np.mean(y)) ** 2)
-r2 = 1 - ss_res / ss_tot
-print(f"R² Score: {r2:.4f}")
-```
-
-**Higher degree example (degree 4):**
-
-```python
-X_poly4 = make_polynomial_features(x, degree=4)
+X_poly # Design Matrix having Polynomial features
 
 # Add Ridge regularisation to avoid overfitting with high-degree features
 model_ridge = Linear_Regression(regularisation_l2=True, alpha=0.1)
@@ -255,23 +223,7 @@ model_ridge.fit(X_poly4, y)
 y_pred4 = model_ridge.predict(X_poly4)
 ```
 
-> **Tip:** For high polynomial degrees (d ≥ 4), always consider enabling Ridge regularisation (`regularisation_l2=True`) to prevent overfitting.
-
-**Multi-feature polynomial expansion:**
-
-```python
-# For multiple input features, use interaction and power terms manually
-X2 = np.column_stack([
-    X[:, 0],        # x1
-    X[:, 1],        # x2
-    X[:, 0]**2,     # x1²
-    X[:, 1]**2,     # x2²
-    X[:, 0] * X[:, 1]  # x1·x2 (interaction term)
-])
-
-model = Linear_Regression()
-model.fit(X2, y)
-```
+For higher degrees (d ≥ 4), it is recommended to enable Ridge regularisation (regularisation_l2=True) to prevent overfitting, since high-degree polynomial features tend to cause the model to chase noise in the training data.
 
 ---
 
@@ -295,15 +247,6 @@ Mean-centering removes the need to augment `X` with a column of ones to learn th
 
 ---
 
-## Limitations
-
-- **Closed-form only** — not suitable for very large datasets (millions of rows) where iterative solvers are preferred
-- **No feature scaling built-in** — for Ridge regression, manually standardise features before fitting for best results
-- **No multi-output optimisation** — multi-output targets work but each output is solved independently via flattening
-- **No built-in cross-validation** — alpha for Ridge must be tuned externally
-
----
-
 ## Dependencies
 
 ```
@@ -312,6 +255,6 @@ numpy
 
 ---
 
-## License
+## HaHa
 
-MIT — free to use, modify, and distribute.
+Completly enjoyed it

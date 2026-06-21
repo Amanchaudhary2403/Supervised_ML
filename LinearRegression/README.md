@@ -126,16 +126,6 @@ Generates predictions for new input data.
 
 ## Usage Examples
 
-### Setup
-
-```python
-import numpy as np
-
-# Paste or import the Linear_Regression class here
-```
-
----
-
 ### Simple Linear Regression
 
 ```python
@@ -217,9 +207,9 @@ X_poly # Design Matrix having Polynomial features
 
 # Add Ridge regularisation to avoid overfitting with high-degree features
 model_ridge = Linear_Regression(regularisation_l2=True, alpha=0.1)
-model_ridge.fit(X_poly4, y)
+model_ridge.fit(X_poly, y)
 
-y_pred4 = model_ridge.predict(X_poly4)
+y_pred4 = model_ridge.predict(X_poly)
 ```
 
 For higher degrees (d ≥ 4), it is recommended to enable Ridge regularisation (regularisation_l2=True) to prevent overfitting, since high-degree polynomial features tend to cause the model to chase noise in the training data.

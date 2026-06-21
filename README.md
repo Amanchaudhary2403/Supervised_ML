@@ -23,7 +23,7 @@ Supervised_ML/
 │   ├── linear_regression.py
 │   └── README.md
 │
-└── ... (more algorithms coming)
+└── ... 
 ```
 
 Each algorithm lives in its own folder with its own implementation file and a dedicated README covering the math, class reference, and usage examples.

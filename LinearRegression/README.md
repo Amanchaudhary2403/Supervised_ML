@@ -22,7 +22,6 @@ A clean, minimal implementation of **Ordinary Least Squares (OLS) Linear Regress
   - [Polynomial Regression](#polynomial-regression)
 - [Why Mean-Centering?](#why-mean-centering)
 - [Why `pinv` instead of `inv`?](#why-pinv-instead-of-inv)
-- [Limitations](#limitations)
 
 ---
 

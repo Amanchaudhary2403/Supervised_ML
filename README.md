@@ -72,11 +72,3 @@ All implementations use only:
 ```
 numpy
 ```
-
-No scikit-learn. No tensorflow. No shortcuts.
-
----
-
-## License
-
-MIT — free to use, modify, and learn from.
